@@ -6,7 +6,6 @@
 		"dev": "next dev",
 		"build": "next build",
 		"build:production": "NEXT_PUBLIC_USE_PROXY=false next build",
-		"build:static": "NEXT_PUBLIC_USE_PROXY=false next build",
 		"start": "next start",
 		"lint": "next lint"
 	},
