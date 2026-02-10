@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--background: #0a0e1a;
+	--foreground: #e2e8f0;
+	--card: #151b28;
+	--card-foreground: #e2e8f0;
+	--border: #1e293b;
+	--input: #1e293b;
+	--primary: #60a5fa;
+	--primary-foreground: #0a0e1a;
+	--secondary: #1e293b;
+	--muted: #334155;
+	--accent: #475569;
+}
+
+body {
+	color: var(--foreground);
+	background: var(--background);
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	line-height: 1.6;
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+}
+
+@layer base {
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
+	}
+
+	*::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	*::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background-color: rgba(148, 163, 184, 0.3);
+		border-radius: 4px;
+	}
+
+	*::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(148, 163, 184, 0.5);
+	}
+
+	/* Dark mode select options */
+	select option {
+		background-color: var(--muted);
+		color: var(--foreground);
+	}
+
+	/* Ensure inputs have proper dark mode styling */
+	input,
+	textarea,
+	select {
+		color-scheme: dark;
+	}
+}
