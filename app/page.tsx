@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LanguageSwitcher from '@/components/language-switcher'
 import WorkflowDiagram from '@/components/workflow-diagram'
 import CurlCommandView from '@/components/curl-command-view'
@@ -8,11 +8,47 @@ import BodyEditor from '@/components/body-editor'
 import { useI18n } from '@/lib/i18n/context'
 import { getSteps, type Step } from '@/lib/api/steps'
 
+const STORAGE_KEY_DOMAIN = 'sms-integration-domain'
+const STORAGE_KEY_TOKEN = 'sms-integration-token'
+
+const DEFAULT_DOMAIN = 'https://audit-drm-api-dev.sigmadrm.com'
+const DEFAULT_TOKEN = 'MTRwZTRkejc3amxubW4wcWdlcjFuM2QzbnRjcXI0MDg3MXJ2aGxyMzhtc2lmZTZnbWhmcnNnM3J4bXd6bnIwcjBuYWc2enp0N2lrNTFpczRnOWhqN2cxOXUxejJtdzVsd3ptNXRrMWIyM3poY2k5dXRsZWRzMXV2OGkzYWlxYzA='
+
 export default function Home() {
 	const { t } = useI18n()
-	const [domain, setDomain] = useState('https://audit-drm-api-dev.sigmadrm.com')
-	const [token, setToken] = useState('MTRwZTRkejc3amxubW4wcWdlcjFuM2QzbnRjcXI0MDg3MXJ2aGxyMzhtc2lmZTZnbWhmcnNnM3J4bXd6bnIwcjBuYWc2enp0N2lrNTFpczRnOWhqN2cxOXUxejJtdzVsd3ptNXRrMWIyM3poY2k5dXRsZWRzMXV2OGkzYWlxYzA=')
+	
+	// Initialize state from localStorage or defaults
+	const [domain, setDomain] = useState(() => {
+		if (typeof window !== 'undefined') {
+			const stored = localStorage.getItem(STORAGE_KEY_DOMAIN)
+			return stored || DEFAULT_DOMAIN
+		}
+		return DEFAULT_DOMAIN
+	})
+	
+	const [token, setToken] = useState(() => {
+		if (typeof window !== 'undefined') {
+			const stored = localStorage.getItem(STORAGE_KEY_TOKEN)
+			return stored || DEFAULT_TOKEN
+		}
+		return DEFAULT_TOKEN
+	})
+	
 	const [showToken, setShowToken] = useState(false)
+	
+	// Save domain to localStorage whenever it changes
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			localStorage.setItem(STORAGE_KEY_DOMAIN, domain)
+		}
+	}, [domain])
+	
+	// Save token to localStorage whenever it changes
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			localStorage.setItem(STORAGE_KEY_TOKEN, token)
+		}
+	}, [token])
 	const [selectedStepId, setSelectedStepId] = useState<string | null>(
 		null
 	)
