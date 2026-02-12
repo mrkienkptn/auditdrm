@@ -14,6 +14,8 @@ const STORAGE_KEY_TOKEN = 'sms-integration-token'
 const DEFAULT_DOMAIN = 'https://audit-drm-api-dev.sigmadrm.com'
 const DEFAULT_TOKEN = 'MTRwZTRkejc3amxubW4wcWdlcjFuM2QzbnRjcXI0MDg3MXJ2aGxyMzhtc2lmZTZnbWhmcnNnM3J4bXd6bnIwcjBuYWc2enp0N2lrNTFpczRnOWhqN2cxOXUxejJtdzVsd3ptNXRrMWIyM3poY2k5dXRsZWRzMXV2OGkzYWlxYzA='
 
+const APP_VERSION = '1.0.0'
+
 export default function Home() {
 	const { t } = useI18n()
 	
@@ -81,7 +83,12 @@ export default function Home() {
 					<h1 className="text-3xl font-bold text-foreground">
 						{t.common.title}
 					</h1>
-					<LanguageSwitcher />
+					<div className="flex items-center gap-4">
+						<span className="text-sm text-muted-foreground font-mono">
+							v{APP_VERSION}
+						</span>
+						<LanguageSwitcher />
+					</div>
 				</div>
 
 				{/* Domain and Token Inputs - Inline */}
